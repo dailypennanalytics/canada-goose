@@ -3,7 +3,9 @@ import {
   SET_INIT,
   SAVE_NEW_ARTICLE,
   UNSAVE_NEW_ARTICLE,
-  UPDATE_NOTIF_PREF
+  UPDATE_NOTIF_PREF,
+  UPDATE_DISPLAY_PREF,
+  DEFAULT_DISPLAY_PREF,
 } from '../actions'
 
 import Constants from "expo-constants";
@@ -13,6 +15,7 @@ const defaultSettingsState = {
   savedArticles: null,
   homeSectionPreferences: null,
   notifPreferences: null,
+  displayPreference: DEFAULT_DISPLAY_PREF,
 }
 
 const SettingsReducer = (state = defaultSettingsState, action) => {
@@ -25,10 +28,6 @@ const SettingsReducer = (state = defaultSettingsState, action) => {
       data[el.publication] = el.newSections
     })
     return data
-  }
-
-  const getNewSavedArticleData = savedArticles => {
-    return savedArticles ? savedArticles : []
   }
 
   const getNewNotifPreferencesData = savedNotifPreferences => {
@@ -48,8 +47,9 @@ const SettingsReducer = (state = defaultSettingsState, action) => {
         homeSectionPreferences: getNewHomeSectionData(
           updates.homeSectionPreferences
         ),
-        savedArticles: getNewSavedArticleData(updates.savedArticles),
-        notifPreferences: getNewNotifPreferencesData(updates.notifPreferences)
+        savedArticles: updates.savedArticles || [],
+        notifPreferences: getNewNotifPreferencesData(updates.notifPreferences),
+        displayPreference: updates.displayPreference || DEFAULT_DISPLAY_PREF,
       }
     case UPDATE_HOME_SECTIONS:
       const { publication, newSections } = updates.homeSectionPreferences[0]
@@ -82,6 +82,12 @@ const SettingsReducer = (state = defaultSettingsState, action) => {
       return {
         ...state,
         notifPreferences: newNotifPreferences,
+      }
+    case UPDATE_DISPLAY_PREF:
+      const {newDispPreference} = updates
+      return {
+        ...state,
+        displayPreference: newDispPreference
       }
     default:
       return state

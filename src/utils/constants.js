@@ -35,6 +35,12 @@ export const STREET_HOME_SECTIONS = ['focus', 'features', 'ego', 'style']
 
 export const FIVE_MUNITES = 5 * 60 * 1000
 
+export const DISPLAY_OPTIONS = [
+  {id: "system", name: "System Theme"},
+  {id: "light", name: "Light Mode"},
+  {id: "dark", name: "Dark Mode"}
+]
+
 export const SETTINGS_SECTIONS = [
   {
     id: 'account section',
@@ -77,6 +83,14 @@ export const SETTINGS_SECTIONS = [
         name: 'Privacy',
         screenName: 'WebView',
         props: { link: 'https://www.thedp.com/page/app-privacy' },
+      },
+      {
+        id: 'display cell',
+        icon: 'color-palette',
+        color: '#66d464',
+        name: 'Display Settings',
+        screenName: 'DisplaySettings',
+        props: {},
       },
     ],
   },

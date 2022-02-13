@@ -14,6 +14,7 @@ import {
   SavedArticlesScreen,
   ArticleScreen,
   ManageFeedScreen,
+  DisplaySettingsScreen,
 } from '../screens'
 import { DefaultStatusBar } from '../components'
 
@@ -92,6 +93,12 @@ export const SettingsStack = ({ navigation }) => {
           name="SettingsArticle"
           component={ArticleScreen}
           options={ArticleScreen.navigationOptions}
+        />
+
+        <Stack.Screen
+          name="DisplaySettings"
+          component={DisplaySettingsScreen}
+          options={{title: 'Display Settings'}}
         />
       </Stack.Navigator>
     </>
